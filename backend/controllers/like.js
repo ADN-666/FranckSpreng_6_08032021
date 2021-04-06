@@ -49,7 +49,7 @@ exports.createLike = (req, res, next) => {
         }
       }
 
-      Sauce.updateOne(like)
+      Sauce.updateOne({ _id: req.params.id }, like)
         .then((sauce) => res.status(200).json(sauce))
         .catch((error) => res.status(400).json({ error }));
     })

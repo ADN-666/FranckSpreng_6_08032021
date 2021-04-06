@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
@@ -9,6 +8,14 @@ const headers = require("./middleware/headers");
 const saucesRoutes = require("./routes/sauces");
 const userRoutes = require("./routes/user");
 const likeRoutes = require("./routes/like");
+const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
+const Ddos = require("ddos");
+const ddos = new Ddos({ burst: 10, limit: 15 });
+
+app.use(helmet());
+app.use(mongoSanitize());
+app.use(ddos.express);
 
 mongoose
   .connect(
@@ -24,9 +31,9 @@ mongoose
     console.error(error);
   });
 
-app.use(headers);
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(helmet());
+app.use(headers);
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/sauces", saucesRoutes, likeRoutes);
 app.use("/api/auth", userRoutes);
