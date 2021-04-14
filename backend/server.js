@@ -1,3 +1,6 @@
+// fichier concernant la déclaration du serveur, sa création et la gestion des ports
+// Déclaration du fichier app regroupant l'ensemble des fonctions du serveur
+
 const http = require("http");
 const app = require("./app.js");
 

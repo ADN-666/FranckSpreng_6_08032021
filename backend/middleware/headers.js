@@ -1,3 +1,5 @@
+// fonction permettant le contrôle de ce qui se trouve dans les en-têtes des requêtes
+
 module.exports = (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(

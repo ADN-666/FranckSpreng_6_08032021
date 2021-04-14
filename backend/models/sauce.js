@@ -1,3 +1,5 @@
+// Fichier contenant le modèle de sauce selon le schéma du module mongoose
+
 const mongoose = require("mongoose");
 
 const sauceSchema = mongoose.Schema({

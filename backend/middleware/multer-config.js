@@ -1,3 +1,6 @@
+/* fonction permettant la création d'un fichier ainsi que son formatage et son enregistrement dans un dossier
+du serveur */
+
 const multer = require("multer");
 
 const MIME_TYPES = {

@@ -1,7 +1,7 @@
 const User = require("../models/user");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const cryptoJS = require("crypto-js");
+const bcrypt = require("bcrypt"); // module de cryptage du mot de passe
+const jwt = require("jsonwebtoken"); // module permettant la création d'un jeton d'authentification
+const cryptoJS = require("crypto-js"); // module de cryptage et décryptage de l'adresse mail
 
 exports.signup = (req, res, next) => {
   const emailEncrypt = cryptoJS.AES.encrypt(

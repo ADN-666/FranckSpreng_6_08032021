@@ -1,3 +1,5 @@
+// Fichier contenant le modèle des utilisateurs selon le schéma du module mongoose
+
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 

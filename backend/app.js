@@ -1,3 +1,6 @@
+/* fichier principal contenant l'ensemble des accés aux différentes routes et fonctions du serveur ainsi
+que les déclarations des différents modules utilisés */
+
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -13,9 +16,13 @@ const mongoSanitize = require("express-mongo-sanitize");
 const Ddos = require("ddos");
 const ddos = new Ddos({ burst: 10, limit: 15 });
 
+// appel des fonctions de sécurité
+
 app.use(helmet());
 app.use(mongoSanitize());
 app.use(ddos.express);
+
+// connexion à la BDD MongoDB Atlas avec utilisation de vatiables d'environnement pour la sécurisation des données
 
 mongoose
   .connect(
@@ -30,6 +37,8 @@ mongoose
     console.log("Connexion à MongoDB échouée !");
     console.error(error);
   });
+
+// appel des différentes fonctions
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

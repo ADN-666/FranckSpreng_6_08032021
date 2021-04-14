@@ -1,3 +1,6 @@
+/* fonction permettant de controler la validité des champs Emails et mots de passe à la création d'un nouvel utilisateur,
+utilisation de regex afin de renforcer le mot de passe en obligeant certains caractères. */
+
 const Joi = require("@hapi/joi");
 
 module.exports = (req, res, next) => {

@@ -1,3 +1,8 @@
+/* Fichier contenant la logique permettant l'attribution d'un like ou dislike
+  à une sauce sélectionné ainsi que l'ajout du user id dans le tableau usersliked
+  ou usersdisliked correspondant à son choix, selon des conditions définies, puis
+  mise é jour de la sauce*/
+
 const Sauce = require("../models/sauce");
 
 exports.createLike = (req, res, next) => {

@@ -1,5 +1,7 @@
+/* Fichier contenant la logique des sauces*/
+
 const Sauce = require("../models/sauce");
-const fs = require("fs");
+const fs = require("fs"); // module permettant l'enregistrement d'une image sur le serveur
 
 exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
@@ -27,6 +29,9 @@ exports.getOneSauce = (req, res, next) => {
     .then((sauce) => res.status(200).json(sauce))
     .catch((error) => res.status(404).json({ error }));
 };
+
+/* fonction de modification d'une sauce en particulier incluant une condition
+qui permet de supprimer l'ancienne photo si celle ci a été modifiée */
 
 exports.modifySauce = (req, res, next) => {
   const sauceObject = req.file
