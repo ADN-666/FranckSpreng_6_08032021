@@ -11,9 +11,9 @@ const headers = require("./middleware/headers");
 const saucesRoutes = require("./routes/sauces");
 const userRoutes = require("./routes/user");
 const likeRoutes = require("./routes/like");
-const helmet = require("helmet");
-const mongoSanitize = require("express-mongo-sanitize");
-const Ddos = require("ddos");
+const helmet = require("helmet"); // module de sécurité pour les en-têtes HTTP comprenant 11 sous modules
+const mongoSanitize = require("express-mongo-sanitize"); // module de sécurité contre les attaques par injection de sélecteur de requête
+const Ddos = require("ddos"); // module de sécurité pour les attaues par déni de service
 const ddos = new Ddos({ burst: 10, limit: 15 });
 
 // appel des fonctions de sécurité
