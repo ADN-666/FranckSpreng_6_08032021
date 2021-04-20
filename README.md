@@ -3,7 +3,7 @@ Formation développeur web - PROJET 6
 
 Construisez une API sécurisée pour une application d'avis gastronomiques
 
-- Dans un terminal, depuis le répertoire "backend", lancez les commandes suivantes : `npm install` puis `nodemon server`
+- Dans un terminal, depuis le répertoire "backend", lancez les commandes suivantes : `npm server`
 - Dans un autre terminal, depuis le répertoire "frontend", lancez les commandes suivantes : `npm install`, `npm install node-sass` puis `npm start`
 -> Rendez-vous sur `http://localhost:4200/`.
 
