@@ -4,23 +4,60 @@ const jwt = require("jsonwebtoken"); // module permettant la création d'un jeto
 const cryptoJS = require("crypto-js"); // module de cryptage et décryptage de l'adresse mail
 
 exports.signup = (req, res, next) => {
-  const emailEncrypt = cryptoJS.AES.encrypt(
-    req.body.email,
-    process.env.KEYCRYPT
-  ).toString();
-  bcrypt
-    .hash(req.body.password, 10)
-    .then((hash) => {
-      const user = new User({
-        email: emailEncrypt,
-        password: hash,
-      });
-      user
-        .save()
-        .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-        .catch((error) => res.status(400).json({ error }));
+  User.find()
+    .then((users) => {
+      if (users.length === 0) {
+        const emailCrypt = CryptoJS.AES.encrypt(
+          req.body.email,
+          process.env.KEYCRYPT
+        ).toString();
+        bcrypt
+          .hash(req.body.password, 10)
+          .then((hash) => {
+            const user = new User({
+              email: emailCrypt,
+              password: hash,
+            });
+            user
+              .save()
+              .then(() =>
+                res.status(201).json({ message: "Utilisateur créé!" })
+              )
+              .catch((error) => res.status(500).json({ error }));
+          })
+          .catch((error) => res.status(500).json({ error }));
+      } else {
+        for (let user of users) {
+          let emailDecrypt = CryptoJS.AES.decrypt(
+            user.email,
+            process.env.KEYCRYPT
+          ).toString(CryptoJS.enc.Utf8);
+          if (emailDecrypt === req.body.email) {
+            res.status(401).json({ message: "Utilisateur déjà utilisé!" });
+          }
+        }
+        const emailCrypt = CryptoJS.AES.encrypt(
+          req.body.email,
+          process.env.KEYCRYPT
+        ).toString();
+        bcrypt
+          .hash(req.body.password, 10)
+          .then((hash) => {
+            const user = new User({
+              email: emailCrypt,
+              password: hash,
+            });
+            user
+              .save()
+              .then(() =>
+                res.status(201).json({ message: "Utilisateur créé!" })
+              )
+              .catch((error) => res.status(500).json({ error }));
+          })
+          .catch((error) => res.status(500).json({ error }));
+      }
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch((error) => res.status(401).json({ error }));
 };
 
 exports.login = (req, res, next) => {
