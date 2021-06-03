@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt"); // module de cryptage du mot de passe
 const jwt = require("jsonwebtoken"); // module permettant la création d'un jeton d'authentification
-const cryptoJS = require("crypto-js"); // module de cryptage et décryptage de l'adresse mail
+const CryptoJS = require("crypto-js"); // module de cryptage et décryptage de l'adresse mail
 
 exports.signup = (req, res, next) => {
   User.find()
@@ -64,10 +64,10 @@ exports.login = (req, res, next) => {
   User.find()
     .then((users) => {
       for (let user of users) {
-        const emailDecrypt = cryptoJS.AES.decrypt(
+        const emailDecrypt = CryptoJS.AES.decrypt(
           user.email,
           process.env.KEYCRYPT
-        ).toString(cryptoJS.enc.Utf8);
+        ).toString(CryptoJS.enc.Utf8);
         if (emailDecrypt === req.body.email) {
           bcrypt
             .compare(req.body.password, user.password)
